@@ -1,0 +1,7 @@
+body div a {
+    border: 1px solid grey;
+    height: 30px;
+    display: block;
+    width: 200px;
+    text-align: center;
+}
