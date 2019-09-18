@@ -1,7 +1,9 @@
-body div a {
-    border: 1px solid grey;
-    height: 30px;
-    display: block;
-    width: 200px;
-    text-align: center;
+.wrapper {
+    border: 1px solid;
+    margin-top: 10px;
+    padding-left: 10px;
+}
+
+.navigation input {
+    margin-left: 10px;
 }

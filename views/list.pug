@@ -1,0 +1,16 @@
+extends layout
+
+include ./mixins/snippet-item
+
+block main
+    header
+        h1 Сниппеты
+        a(href="/snippets/create") Создать
+
+    div
+        if snippets.length
+            div
+                for snippet in snippets
+                    +snippet-item(snippet)
+        else
+            p У вас еще нет сниппетов

@@ -1,0 +1,16 @@
+mixin snippet-item(snippet)
+    div.wrapper
+        a(href=snippet.url)
+            div
+                h6
+                    =snippet.filename
+                h7
+                    =`Язык- ${snippet.language}`
+
+                div
+                    if snippet.updatedAt
+                        =`Обновлено ${snippet.updatedAt}`
+                    else
+                        =`Обновлено ${snippet.createdAt}`
+
+            p= snippet.description

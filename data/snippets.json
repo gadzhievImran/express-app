@@ -1,0 +1,20 @@
+[
+  {
+    "id": "wf23468938erf9",
+    "filename": "hello-world.js",
+    "description": "Hello world на JavaScript",
+    "language": "JS",
+    "code": "console.log(\"Hello World\")",
+    "createdAt": 1234543234564,
+    "updatedAt": 1234543234564
+  },
+  {
+    "id": "wf23468938frf9",
+    "filename": "hello_world.ru",
+    "description": "Hello world на Python",
+    "language": "python",
+    "code": "print(\"Hello World\")",
+    "createdAt": 1234543234564,
+    "updatedAt": null
+  }
+]
