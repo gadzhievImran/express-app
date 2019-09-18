@@ -1,0 +1,26 @@
+extends layout
+
+block main
+    nav
+        ol
+            li
+                a(href="/snippets") Сниппеты
+            li= snippet.filename
+    article
+        header
+            div
+                h5= snippet.filename
+
+                h6= `Язык: ${snippet.language}`
+
+                small= snippet.updatedAt ? `Обновлено: ${snippet.updatedAt}` : `Создано: ${snippet.createdAt}`
+
+            div
+                a(href=`${snippet.id}/update`) Редактировать
+                br
+                a(href=`#` data-toggle="modal" data-target="#confirm-modal") Удалить
+
+        section
+            p= snippet.description
+            pre
+                code= snippet.code

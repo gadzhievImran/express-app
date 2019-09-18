@@ -1,6 +1,6 @@
 mixin snippet-item(snippet)
     div.wrapper
-        a(href=snippet.url)
+        a(href=`snippets/${snippet.id}`)
             div
                 h6
                     =snippet.filename
