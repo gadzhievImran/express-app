@@ -1,11 +1,14 @@
 module.exports = [
   {
-    mode: 'javascript'
+    mode: 'javascript',
+    name: 'JAVASCRIPT'
   },
   {
-    mode: 'python'
+    mode: 'python',
+    name: 'PYTHON'
   },
   {
-    mode: 'php'
+    mode: 'php',
+    name: 'PHP'
   }
 ];
