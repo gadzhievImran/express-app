@@ -1,11 +1,11 @@
 const express = require('express');
-const path = require('path');
 const { highlight } = require('highlightjs');
 const moment = require('moment');
 require('moment/locale/ru');
 moment.locale('ru');
 
 const snippets = require('./data/snippets.json');
+const languages = require('./data/languages');
 
 const server = express();
 
@@ -39,12 +39,12 @@ server.get('/snippets/:snippetId', (req, res) => {
     })
 });
 
-server.get('/snippets/:snippetId/update', (res, req) => {
+server.get('/snippets/:snippetId/update', (req, res) => {
     const snippet = snippets.find(s => s.id === req.params.snippetId);
 
     res.render('form', {
-        title: snippet.filename,
-        snippet
+        snippet,
+        languages
     })
 });
 

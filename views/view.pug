@@ -1,6 +1,6 @@
 extends layout
 block styles
-    link(rel="stylesheet", href="/lib/highlight.js/styles/github.css")
+    //link(rel="stylesheet", href="/lib/highlight.js/styles/github.css")
 
 block main
     nav
@@ -18,7 +18,7 @@ block main
                 small= snippet.updatedAt ? `Обновлено: ${moment(snippet.updatedAt).fromNow()}` : `Создано: ${moment(snippet.createdAt).fromNow()}`
 
             div
-                a(href=`${snippet.id}/update`) Редактировать
+                a(href=`/snippets/${snippet.id}/update`) Редактировать
                 br
                 a(href=`#` data-toggle="modal" data-target="#confirm-modal") Удалить
 
@@ -26,3 +26,5 @@ block main
             p= snippet.description
             pre
                 code!= highlight(snippet.language, snippet.code).value
+
+                // 53.27

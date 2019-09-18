@@ -7,4 +7,29 @@ block main
     form(method="POST")
         div
             label Название файла с расширением
-            input(type="text" name="filename" required value=snippet.filename placeholder="index.js")
+            input(
+                type="text"
+                name="filename"
+                required
+                value=snippet.filename
+                placeholder="index.js"
+            )
+
+        div
+            label Описание
+            input(type="text" name="description" value=snippet.description)
+
+        div
+            label Язык
+            select(name="language" value=snippet.language)
+                option(disabled selected)
+                for language in languages
+                    option(value=language.mode selected=language.mode === snippet.language)= language.name
+
+        div
+            label Содержание
+            textarea(name="code")= snippet.code
+
+        a(href=snippet.id ? `/snippets/${snippet.id}` : '/snippets') Назад
+
+        button(type="submit")= snippet.id ? 'Сохранить' : 'Создать'
