@@ -3,7 +3,7 @@
     "id": "wf23468938erf9",
     "filename": "hello-world.js",
     "description": "Hello world на JavaScript",
-    "language": "JS",
+    "language": "javascript",
     "code": "console.log(\"Hello World\")",
     "createdAt": 1234543234564,
     "updatedAt": 1234543234564

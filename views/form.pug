@@ -1,0 +1,10 @@
+extends layout
+
+block main
+    header
+        h1= snippet.id ? 'Редактирвоание сниппета' : 'Новый сниппет'
+
+    form(method="POST")
+        div
+            label Название файла с расширением
+            input(type="text" name="filename" required value=snippet.filename placeholder="index.js")

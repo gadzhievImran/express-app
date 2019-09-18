@@ -9,8 +9,8 @@ mixin snippet-item(snippet)
 
                 div
                     if snippet.updatedAt
-                        =`Обновлено ${snippet.updatedAt}`
+                        =`Обновлено ${moment(snippet.updatedAt).fromNow()}`
                     else
-                        =`Обновлено ${snippet.createdAt}`
+                        =`Обновлено ${moment(snippet.createdAt).fromNow()}`
 
             p= snippet.description

@@ -1,4 +1,6 @@
 extends layout
+block styles
+    link(rel="stylesheet", href="/lib/highlight.js/styles/github.css")
 
 block main
     nav
@@ -13,7 +15,7 @@ block main
 
                 h6= `Язык: ${snippet.language}`
 
-                small= snippet.updatedAt ? `Обновлено: ${snippet.updatedAt}` : `Создано: ${snippet.createdAt}`
+                small= snippet.updatedAt ? `Обновлено: ${moment(snippet.updatedAt).fromNow()}` : `Создано: ${moment(snippet.createdAt).fromNow()}`
 
             div
                 a(href=`${snippet.id}/update`) Редактировать
@@ -23,4 +25,4 @@ block main
         section
             p= snippet.description
             pre
-                code= snippet.code
+                code!= highlight(snippet.language, snippet.code).value
