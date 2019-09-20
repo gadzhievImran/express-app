@@ -1,51 +1,23 @@
 const express = require('express');
-const { highlight } = require('highlightjs');
-const moment = require('moment');
-require('moment/locale/ru');
-moment.locale('ru');
 
-const snippets = require('./data/snippets.json');
-const languages = require('./data/languages');
+const highlight = require('./util/highlight');
+const moment = require('./util/moment');
+const snippetRouter = require('./router/snippets');
 
 const server = express();
+server.locals.highlight = highlight;
+server.locals.moment = moment;
 
 server.set('view engine', 'pug');
 
 server.use(express.static('public'));
 server.use('/lib', express.static('node_modules'));
-
 server.use(express.urlencoded({ extended: true }));
 
 server.get('/', (req, res) => {
     res.render('index');
 });
 
-server.get('/snippets', (req, res) => {
-    res.render('list', {
-        title: 'Сниппеты',
-        snippets,
-        moment
-    });
-});
-
-server.get('/snippets/:snippetId', (req, res) => {
-    const snippet = snippets.find(s => s.id === req.params.snippetId);
-
-    res.render('view', {
-        title: snippet.filename,
-        snippet,
-        highlight,
-        moment
-    })
-});
-
-server.get('/snippets/:snippetId/update', (req, res) => {
-    const snippet = snippets.find(s => s.id === req.params.snippetId);
-
-    res.render('form', {
-        snippet,
-        languages
-    })
-});
+server.use('/snippets', snippetRouter);
 
 server.listen(3000, () => console.log('Сервер запущен по адресу http://localhost:3000'));
