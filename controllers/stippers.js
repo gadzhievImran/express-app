@@ -2,6 +2,18 @@ const snippets = require('../data/snippets.json');
 const languages = require('../data/languages');
 
 module.exports = {
+  findOne: (req, res, next, id) => {
+    const snippet = snippets.find(s => s.id === id);
+    
+    if(!snippet) {
+      return res.redirect('/');
+    }
+    
+    req.snippet = snippet;
+    
+    next();
+  },
+  
   showAll: (req, res) => {
     res.render('list', {
       title: 'Сниппеты',
@@ -19,7 +31,21 @@ module.exports = {
   },
   
   showSearch: (req, res) => {
-  
+    if(!req.query.search) return res.redirect('/snippets');
+    
+    const query = req.query.search;
+    
+    const foundSnippets = snippets.find(s =>
+      s.filename.toLowerCase().includes(query) ||
+      s.description.toLowerCase().includes(query) ||
+      s.language.toLocaleLowerCase().includes(query)
+    );
+    
+    res.render('search', {
+      title: 'Результаты поиска',
+      query,
+      snippets: foundSnippets
+    })
   },
   
   showCreate: (req, res) => {
@@ -31,10 +57,8 @@ module.exports = {
   },
   
   showUpdate: (req, res) => {
-    const snippet = snippets.find(s => s.id === req.params.snippetId);
-  
     res.render('form', {
-      snippet,
+      snippet: req.snippet,
       languages
     })
   },
@@ -47,14 +71,16 @@ module.exports = {
   
   update: (req, res) => {
     // update snippet
-    const snippet = snippets.find(s => s.id === req.params.snippetId);
+    const snippet = req.snippet;
     
     res.redirect(`/snippets/${snippet.id}`)
   },
   
   delete: (req, res) => {
-    res.redirect('/snippets')
+    const snippet = req.snippet;
+    
+    res.redirect('/snippets');
   }
 };
 
-// 1.21.08
+// 1.30

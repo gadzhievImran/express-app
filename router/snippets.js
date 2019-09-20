@@ -4,6 +4,8 @@ const controller = require('../controllers/stippers');
 
 const router = Router();
 
+router.param('snippetId', controller.findOne);
+
 router.get('/', controller.showAll);
 router.get('/search', controller.showSearch);
 
