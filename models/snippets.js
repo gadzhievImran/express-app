@@ -1,7 +1,9 @@
+const { randomBytes } = require('crypto');
+
 const snippets = require('../data/snippets.json');
 const languages = require('../data/languages');
 
-class Snipet {
+class Snippet {
   static find(predicate = arg => arg) {
     return snippets.filter(predicate);
   }
@@ -9,8 +11,33 @@ class Snipet {
   static findById(id) {
     return snippets.find(s => s.id === id);
   }
+  
+  static create(data) {
+    const snippet = new Snippet({
+      ...data,
+      id: randomBytes(8).toString('hex'),
+      createdAt: Date.now()
+    });
+    
+    snippets.push(snippet);
+    console.log(snippet, 'snippet');
+    
+    return Promise.resolve(snippet);
+  }
+  
+  constructor(props) {
+    Object.assign(this, Snippet.schema, props);
+  }
 }
 
-Snipet.languages = languages;
+Snippet.languages = languages;
 
-module.exports = Snipet;
+Snippet.schema = {
+  filename: '',
+  description: '',
+  language: '',
+  code: '',
+  time: '1.56.32'
+};
+
+module.exports = Snippet;

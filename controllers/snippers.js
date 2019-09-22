@@ -62,9 +62,8 @@ module.exports = {
   },
   
   create: (req, res) => {
-    // create snippet
-    
-    res.redirect('/snippets');
+    Snippet.create(req.body)
+      .then(() =>  res.redirect('/snippets'))
   },
   
   update: (req, res) => {
