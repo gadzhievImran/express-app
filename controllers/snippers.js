@@ -1,9 +1,8 @@
-const snippets = require('../data/snippets.json');
-const languages = require('../data/languages');
+const Snippet = require('../models/snippets');
 
 module.exports = {
   findOne: (req, res, next, id) => {
-    const snippet = snippets.find(s => s.id === id);
+    const snippet = Snippet.findById(id);
     
     if(!snippet) {
       return res.redirect('/');
@@ -22,20 +21,17 @@ module.exports = {
   },
   
   showOne: (req, res) => {
-    const snippet = snippets.find(s => s.id === req.params.snippetId);
-  
     res.render('view', {
-      title: snippet.filename,
-      snippet
+      title: req.snippet.filename,
+      snippet: req.snippet
     })
   },
   
   showSearch: (req, res) => {
     if(!req.query.search) return res.redirect('/snippets');
+    const query = req.query.search.trim().toLocaleLowerCase();
     
-    const query = req.query.search;
-    
-    const foundSnippets = snippets.find(s =>
+    const foundSnippets = snippets.filter(s =>
       s.filename.toLowerCase().includes(query) ||
       s.description.toLowerCase().includes(query) ||
       s.language.toLocaleLowerCase().includes(query)

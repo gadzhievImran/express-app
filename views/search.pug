@@ -1,0 +1,20 @@
+extends layout
+
+block header
+block main
+    header
+        h1 Результаты поиска по запросу "#{query}"
+        a(href="/create") Создать
+
+    div
+        if snippets.length
+            div
+                for snippet in snippets
+                    a(href=`/${snippet.id}`)
+                        div
+                            h6= snippet.filename
+                            small= moment(snippet.date).fromNow()
+                            p= snippet.description
+        else
+            p Сниппетов по запросу не найдено
+            a(href="/") Назад
