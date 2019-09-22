@@ -14,6 +14,8 @@ module.exports = {
   },
   
   showAll: (req, res) => {
+    const snippets = Snippet.find();
+    
     res.render('list', {
       title: 'Сниппеты',
       snippets
@@ -31,7 +33,7 @@ module.exports = {
     if(!req.query.search) return res.redirect('/snippets');
     const query = req.query.search.trim().toLocaleLowerCase();
     
-    const foundSnippets = snippets.filter(s =>
+    const foundSnippets = Snippet.find(s =>
       s.filename.toLowerCase().includes(query) ||
       s.description.toLowerCase().includes(query) ||
       s.language.toLocaleLowerCase().includes(query)
@@ -48,14 +50,14 @@ module.exports = {
     res.render('form', {
       title: 'Новый сниппет',
       snippet: {},
-      languages
+      languages: Snippet.languages
     })
   },
   
   showUpdate: (req, res) => {
     res.render('form', {
       snippet: req.snippet,
-      languages
+      languages: Snippet.languages
     })
   },
   
